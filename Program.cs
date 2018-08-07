@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using angularNet.Models;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,13 @@ namespace angularNet
     {
         public static void Main(string[] args)
         {
+            var account = new AccountCategory();
+            account.Name = "Asset";
+            using(var context = new smart_financeContext())
+            {
+                context.AccountCategory.Add(account);
+                context.SaveChanges();
+            }
             BuildWebHost(args).Run();
         }
 
