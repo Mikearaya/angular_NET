@@ -13,6 +13,7 @@ namespace angularNet.Models
         public smart_financeContext(DbContextOptions<smart_financeContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public virtual DbSet<AccountCategory> AccountCategory { get; set; }

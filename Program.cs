@@ -15,13 +15,7 @@ namespace angularNet
     {
         public static void Main(string[] args)
         {
-            var account = new AccountCategory();
-            account.Name = "Asset";
-            using(var context = new smart_financeContext())
-            {
-                context.AccountCategory.Add(account);
-                context.SaveChanges();
-            }
+    
             BuildWebHost(args).Run();
         }
 
