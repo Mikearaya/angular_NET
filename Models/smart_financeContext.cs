@@ -34,7 +34,7 @@ namespace angularNet.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("server=localhost;port=3306;user=root;database=smart_finance;");
+                optionsBuilder.UseMySql("server=localhost;port=3306;user=mikael;database=smart_finance;");
 
             }
         }
