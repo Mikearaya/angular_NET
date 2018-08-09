@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,17 +31,21 @@ namespace angularNet
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
+            if (env.IsDevelopment())  {
                 app.UseDeveloperExceptionPage();
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
                     HotModuleReplacement = true
                 });
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
+            } else {
+                app.UseExceptionHandler(appBuilder => 
+                    appBuilder.Run(async context => 
+                    {
+                        context.Response.StatusCode = 500;
+                        await context.Response.WriteAsync("An Unexpected error happened")
+
+                    })
+                );
             }
 
             app.UseStaticFiles();
