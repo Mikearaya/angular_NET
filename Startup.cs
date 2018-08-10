@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using angularNet.Models;
+using angularNet.Repositories;
+using angularNet.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -24,12 +26,11 @@ namespace angularNet    {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc( setupAction => 
-            {
-                setupAction.ReturnHttpNotAcceptable = true;
-            });
+            services.AddMvc( );
              services.AddDbContext<smart_financeContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.AddScoped<IAccountCategory, AccountCategoryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
